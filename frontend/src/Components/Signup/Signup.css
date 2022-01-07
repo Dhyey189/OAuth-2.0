@@ -1,0 +1,18 @@
+.signup{
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    width:400px;
+}
+
+.signup > input {
+    size:20px;
+    padding:5px;
+    margin-top: 5px;
+}
+
+.signup > button{
+    size:20px;
+    padding:5px;
+    margin-top: 5px;
+}
