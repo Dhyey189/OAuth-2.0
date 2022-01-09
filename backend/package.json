@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.2",
     "mongoose": "^6.1.5",
+    "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15"
   }
 }

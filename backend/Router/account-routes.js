@@ -9,5 +9,5 @@ const router = express.Router()
 
 router.post('/signup', accountCtrl.signup)//this
 router.post('/login', accountCtrl.login)//this
-
+router.post('/generatecode',accountCtrl.generatecode)
 module.exports = router
