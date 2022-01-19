@@ -22,5 +22,5 @@ app.get('/', (req, res) => {
 })
 
 app.use('/accounts', accountRouter)
-
+app.use('/tokens', accountRouter)
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
