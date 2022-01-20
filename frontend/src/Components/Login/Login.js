@@ -44,6 +44,7 @@ export default function Signup() {
         .then(response => response.json())
         .then(data => {
             console.log('Verified Success:', data);
+            localStorage.setItem("Loginid",data.user._id)
         })
         .catch((error) => {
             console.error('Error:', error);
