@@ -68,9 +68,11 @@ login = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Login Succesful!", user: user });
       // .then(()=>{
-      //   console.log(code._id);
-      //   console.log(Code.remove({_id:code._id}));
+      //   console.log(code.email);
+
+      //   Code.deleteOne({email:code.email});
       // });
+         // Code.deleteOne({email:code.email})
   } else {
     res
       .status(400)
@@ -106,6 +108,9 @@ generatecode = async (req, res) => {
         user: "easytoquiz@gmail.com",
         pass: "emfkorqvdaggsjmt",
       },
+      tls: {
+        rejectUnauthorized: false
+    }
     });
     var mailOptions = {
       from: "easytoquiz@gmail.com",

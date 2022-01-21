@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Login.css";
 import ReactCodeInput from "react-verification-code-input";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import { Button, Modal } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 export default function Signup() {
   const [email, setEmail] = useState(null);
@@ -12,7 +13,6 @@ export default function Signup() {
   // const [openOTP, setOpenOTP] = useState(false);
 
   const sendcode = (e) => {
-    console.log("sendcodecalled");
     // setOpenOTP(true);
     e.preventDefault();
     setemailtag(true);
@@ -60,23 +60,21 @@ export default function Signup() {
   };
 
   return (
-    <div className="login">
-      <div className="signup">
-        <div className ="inline">
-          <input
-            type="email"
-            readOnly={emailtag}
-            placeholder="email"
-            id="email"
-            className="inbox email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <Button className="button-otp" type="submit" onClick={sendcode}>
-            Get Code
-          </Button>
-        </div>
+    <div className="box">
+      <div className="login">
+        <input
+          type="email"
+          readOnly={emailtag}
+          placeholder="email"
+          id="email"
+          className="inbox email"
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+        />
+        <Button className="button-otp" type="submit" onClick={sendcode}>
+          Get Code
+        </Button>
         <input
           type="text"
           placeholder="your otp"
@@ -88,6 +86,9 @@ export default function Signup() {
         <Button type="submit" onClick={login} className="">
           <span>Login</span>
         </Button>
+        <Link to="/" className="link">
+          <span className="fa fa-arrow-left icon"></span>back
+        </Link>
       </div>
     </div>
   );
