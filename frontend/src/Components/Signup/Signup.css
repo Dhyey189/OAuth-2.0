@@ -1,0 +1,50 @@
+.signup {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  grid-area: main;
+  align-self: center;
+  justify-self: center;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 3%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  /* border-radius: 10px; */
+  -webkit-box-shadow: 0px 10px 34px -15px rgb(0 0 0 / 24%);
+  -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+  box-shadow: 0px 10px 34px -15px rgb(0 0 0 / 24%);
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+
+.signup > input {
+  size: 20px;
+  padding: 5px;
+  margin-top: 5px;
+}
+.signup > button {
+  size: 20px;
+  padding: 5px;
+  margin-top: 5px;
+}
+.inbox {
+  margin: 10px 20px;
+  height: 35px;
+  width: auto;
+}
+
+.button-otp {
+  width: fit-content;
+  margin: 10px auto;
+  height: 35px;
+  /* align: center; */
+}
