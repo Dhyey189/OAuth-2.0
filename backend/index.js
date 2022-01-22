@@ -4,9 +4,9 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const db = require('./Database/index.js')
-const accountRouter = require('./Router/account-routes')
-const applicationRouter = require('./Router/application-routes')
-
+const accountRoutes = require('./Router/account-routes')
+const applicationRoutes = require('./Router/application-routes')
+const authRoutes = require('./Router/auth-routes')
 const app = express()
 
 // backend server running on 'http://localhost:8000'.
@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.use('/accounts', accountRouter)
-app.use('/application', applicationRouter)
-app.use('/tokens', accountRouter)
+app.use('/accounts', accountRoutes)
+app.use('/application', applicationRoutes)
+app.use('/oauth', authRoutes)
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))

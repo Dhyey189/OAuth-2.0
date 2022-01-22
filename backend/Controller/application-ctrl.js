@@ -1,4 +1,5 @@
 const Client=require('../Model/application')
+
 register = async (req, res) => {
     const body = req.body;
     if (!body) {
