@@ -7,6 +7,7 @@ const db = require('./Database/index.js')
 const accountRoutes = require('./Router/account-routes')
 const applicationRoutes = require('./Router/application-routes')
 const authRoutes = require('./Router/auth-routes')
+const accesstokenRoutes = require('./Router/accesstoken-routes')
 const app = express()
 
 // backend server running on 'http://localhost:8000'.
@@ -25,4 +26,5 @@ app.get('/', (req, res) => {
 app.use('/accounts', accountRoutes)
 app.use('/application', applicationRoutes)
 app.use('/oauth', authRoutes)
+app.use('/accesstoken', accesstokenRoutes)
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))
