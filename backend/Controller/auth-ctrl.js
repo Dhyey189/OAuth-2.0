@@ -4,6 +4,7 @@ const Client = require('../Model/application')
 const authorizationCode = require('../Model/authorizationcode')
 
 sendAuthorizationCode = async (req, res) => {
+  console.log(req.body);
   const body = req.body;
   if (!body) {
     return res.status(400).json({

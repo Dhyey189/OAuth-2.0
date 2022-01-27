@@ -1,17 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useNavigate,
+  useLocation
+} from "react-router-dom";
 import "./Login.css";
 import ReactCodeInput from "react-verification-code-input";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { Button } from "react-bootstrap";
 
+
+
+
+
 export default function Signup() {
   const [email, setEmail] = useState(null);
   const [otp, setotp] = useState(null);
   const [emailtag, setemailtag] = useState(false);
   // const [openOTP, setOpenOTP] = useState(false);
-
+  
+  const navigate = useNavigate();
   const sendcode = (e) => {
     // setOpenOTP(true);
     e.preventDefault();
@@ -53,6 +66,8 @@ export default function Signup() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Verified Success:", data);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        navigate("/");
       })
       .catch((error) => {
         console.error("Error:", error);
