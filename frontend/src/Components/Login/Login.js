@@ -6,7 +6,7 @@ import {
   Link,
   Redirect,
   useNavigate,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 import "./Login.css";
 import ReactCodeInput from "react-verification-code-input";
@@ -14,21 +14,19 @@ import ReactCodeInput from "react-verification-code-input";
 // import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 import { Button } from "react-bootstrap";
 
-
-
-
-
 export default function Signup() {
   const [email, setEmail] = useState(null);
   const [otp, setotp] = useState(null);
   const [emailtag, setemailtag] = useState(false);
+  const [tag, settag] = useState(false);
   // const [openOTP, setOpenOTP] = useState(false);
-  
+
   const navigate = useNavigate();
   const sendcode = (e) => {
     // setOpenOTP(true);
     e.preventDefault();
     setemailtag(true);
+    settag(true);
     const user = {
       email: email,
     };
@@ -79,28 +77,32 @@ export default function Signup() {
       <div className="login">
         <input
           type="email"
-          readOnly={emailtag}
+          readOnly={tag}
           placeholder="email"
           id="email"
-          className="inbox email"
+          className="inbox1 email"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
         />
-        <Button className="button-otp" type="submit" onClick={sendcode}>
+        <Button className="button-otp" type="submit" onClick={sendcode} disabled={tag}>
           Get Code
         </Button>
-        <input
-          type="text"
-          placeholder="your otp"
-          className="inbox otp"
-          onChange={(e) => {
-            setotp(e.target.value);
-          }}
-        />
-        <Button type="submit" onClick={login} className="">
-          <span>Login</span>
-        </Button>
+        {tag ? (
+          <>
+            <input
+              type="text"
+              placeholder="your otp"
+              className="inbox1 otp"
+              onChange={(e) => {
+                setotp(e.target.value);
+              }}
+            />
+            <Button type="submit" onClick={login} className="">
+              <span>Login</span>
+            </Button>
+          </>
+        ) : null}
         <Link to="/" className="link">
           <span className="fa fa-arrow-left icon"></span>back
         </Link>
