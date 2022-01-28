@@ -1,9 +1,9 @@
-import react from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import Navbar from './Components/Navbar/Navbar.js'
 import Signup from './Components/Signup/Signup.js'
 import Login from './Components/Login/Login.js'
 import ClientID from './Components/ClientID/ClientID.js';
+import Auth from './Components/Auth/Auth.js';
 import './App.css';
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/get-clientid" element={<ClientID />} />
-          </Routes>
+            <Route path="/auth" element={<Auth />} />
+      </Routes>
     </Router>
     );
 }
