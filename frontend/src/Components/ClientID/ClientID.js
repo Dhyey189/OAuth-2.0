@@ -46,7 +46,7 @@ export default function ClientID() {
         readOnly={tag}
         placeholder="Application Name"
         id="application"
-        className="inbox email"
+        className="inbox1 email"
         onChange={(e) => {
           setAppName(e.target.value);
         }}
@@ -56,7 +56,7 @@ export default function ClientID() {
         readOnly={tag}
         placeholder="Home URL"
         id="home-url"
-        className="inbox email"
+        className="inbox1 email"
         onChange={(e) => {
           setHomeURL(e.target.value);
         }}
@@ -66,7 +66,7 @@ export default function ClientID() {
         readOnly={tag}
         placeholder="application discription"
         id="disc"
-        className="inbox email"
+        className="inbox1 email"
         onChange={(e) => {
           setDisc(e.target.value);
         }}
@@ -76,7 +76,7 @@ export default function ClientID() {
         readOnly={tag}
         placeholder="callback URL"
         id="callback-url"
-        className="inbox email"
+        className="inbox1 email"
         onChange={(e) => {
           setCallbackURL(e.target.value);
         }}

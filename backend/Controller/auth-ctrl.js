@@ -14,33 +14,29 @@ sendAuthorizationCode = async (req, res) => {
   }
   // body = {client_id, user_id, response_type, state, redired_uri, scope,}
   const client = await Client.findOne({ _id: body.client_id });
-  const user = await User.findOne({ _id: body.user_id});
-  if (client && user  ) {
+  const user = await User.findOne({ _id: body.user_id });
+  if (client && user) {
     const codeValue = Math.random().toString(13).replace('0.', '');
-    const authcode = new authorizationCode();
-    authcode.authorizationcode = codeValue;
-    authcode.applicationid = client._id;
-    authcode.userid = body.user_id;
-    authcode
-      .save()
-      .then(() => {
-        return res
-          .status(200)
-          .json({
-            success: true,
-            message: "Code send successfully",
-            state: body.state,
-            authorizationcode: authcode.authorizationcode
-          });
-      })
-      .catch((error) => {
-        return res.status(400).json({
-          error,
-          message: "Some thing went wrong!!",
+    const authcode = await authorizationCode.updateOne(
+      { userid: body.user_id,applicationid: body.client_id },{ authorizationcode:codeValue}, { upsert: true }
+    );
+    if (authcode.acknowledged) {
+      return res
+        .status(200)
+        .json({
+          success: true,
+          message: "Code send successfully",
+          state: body.state,
+          authorizationcode: codeValue
         });
+    }
+    else {
+     return res.status(400).json({
+        message: "Some thing went wrong try again!!",
       });
+    }
   } else {
-    res
+    return res
       .status(400)
       .json({
         success: false,

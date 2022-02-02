@@ -15,13 +15,13 @@ import ReactCodeInput from "react-verification-code-input";
 import { Button } from "react-bootstrap";
 
 export default function Signup() {
+  let navigate = useNavigate();
+  const query = new URLSearchParams(useLocation().search);
   const [email, setEmail] = useState(null);
   const [otp, setotp] = useState(null);
   const [emailtag, setemailtag] = useState(false);
   const [tag, settag] = useState(false);
   // const [openOTP, setOpenOTP] = useState(false);
-
-  const navigate = useNavigate();
   const sendcode = (e) => {
     // setOpenOTP(true);
     e.preventDefault();
@@ -65,6 +65,10 @@ export default function Signup() {
       .then((data) => {
         console.log("Verified Success:", data);
         localStorage.setItem("user", JSON.stringify(data.user));
+        if(query.get('backto'))
+        navigate("/"+query.get('backto')+'?client_id='+query.get('client_id')+'&response_type='+query.get('response_type')
+        +'&state='+query.get('state')+'&redirect_uri='+query.get('redirect_uri')+'&scope='+query.get('scope'))
+        else
         navigate("/");
       })
       .catch((error) => {
