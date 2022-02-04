@@ -17,7 +17,8 @@ sendAuthorizationCode = async (req, res) => {
   const user = await User.findOne({ _id: body.user_id });
   if (client && user) {
     const codeValue = Math.random().toString(13).replace('0.', '');
-    const authcode = await authorizationCode.updateOne(
+    try{
+      const authcode = await authorizationCode.updateOne(
       { userid: body.user_id,applicationid: body.client_id },{ authorizationcode:codeValue}, { upsert: true }
     );
     if (authcode.acknowledged) {
@@ -30,11 +31,14 @@ sendAuthorizationCode = async (req, res) => {
           authorizationcode: codeValue
         });
     }
-    else {
-     return res.status(400).json({
+  }
+    catch(e) {
+      console.log(e);
+      return res.status(400).json({
         message: "Some thing went wrong try again!!",
       });
     }
+    
   } else {
     return res
       .status(400)
