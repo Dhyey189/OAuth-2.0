@@ -1,7 +1,8 @@
 // const Accesstoken = require("../Model/accesstoken")
 // const authorizationCode = require('../Model/authorizationcode')
 const axios = require('axios')
-
+const CID = '61fa6488efb0c2efd0d03b6e';
+const CS = '904ba37a0790044';
 
 auth = async (req, res) => {
     const body = req.body;
@@ -9,8 +10,8 @@ auth = async (req, res) => {
     axios
     .post('http://localhost:8000/accesstoken/accesstoken-code', {
         "authorizationcode" : body.code,
-        "client_id" : '61fa6488efb0c2efd0d03b6e',
-        "client_secret" : '904ba37a0790044'
+        "client_id" : CID,
+        "client_secret" : CS
       })
     //   .then((response) => response.json())
       .then((response) => {
@@ -19,8 +20,8 @@ auth = async (req, res) => {
         axios
         .post('http://localhost:8000/accesstoken/getuserinfo', {
             "accesstoken" : data.accesstoken,
-            "client_id" : '61fa6488efb0c2efd0d03b6e',
-            "client_secret" : '904ba37a0790044'
+            "client_id" : CID,
+            "client_secret" : CS
         })
         .then((userinfo)=>{
           console.log("USER DATA",userinfo.data.user)

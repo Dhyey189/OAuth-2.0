@@ -8,12 +8,11 @@ genrateAccesstoken = async (req, res) => {
   if (!body) {
     return res.status(400).json({
       success: false,
-      error: "You must provide authorization code!!",
+      error: "You must provide acccess token!!",
     });
   }
-  // body = {client_id, response_type, state, redired_uri, scope,}
   const authorizationcode = await authorizationCode.findOne({
-    authorizationCode: body.authorizationCode,
+    authorizationcode: body.authorizationcode,
     applicationid: body.client_id
   });
   const client = await Application.findOne({ _id: body.client_id });
@@ -23,29 +22,35 @@ genrateAccesstoken = async (req, res) => {
       body.client_secret === client.clientsecret
     ) {
       const token = (Math.random() + 1).toString(36).substring(7);
-      const access_token = await Accesstoken.updateOne(
-        {
-          userid: authorizationcode.userid,
-          applicationid: authorizationcode.applicationid,
-        },
-        { accesstoken: token },
-        { upsert: true }
-      );
-      if (access_token.acknowledged) {
-        return res
-          .status(200)
-          .json({
-            success: true,
-            message: "Access token Generate Successfully",
-            accesstoken: token,
-          });
-      } else {
+      try {
+
+        const access_token = await Accesstoken.updateOne(
+          {
+            userid: authorizationcode.userid,
+            applicationid: authorizationcode.applicationid,
+          },
+          { accesstoken: token },
+          { upsert: true }
+        );
+        if (access_token.acknowledged) {
+          return res
+            .status(200)
+            .json({
+              success: true,
+              message: "Access token Generate Successfully 👍",
+              accesstoken: token,
+            });
+        }
+
+      }
+      catch (err) {
         return res.status(400).json({
-          error,
-          message: "Some thing went wrong!!",
+          error: err,
+          message: "Some thing went wrong!!🤷‍♂️",
         });
       }
-    } else {
+    }
+    else {
       return res.status(401).json({
         message: "Invalid credentials!",
       });
