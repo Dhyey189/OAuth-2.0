@@ -13,9 +13,9 @@ sendAuthorizationCode = async (req, res) => {
     });
   }
   // body = {client_id, user_id, response_type, state, redired_uri, scope,}
-  const client = await Client.findOne({ _id: body.client_id });
-  const user = await User.findOne({ _id: body.user_id });
-  if (client && user) {
+  try {
+    const client = await Client.findOne({ _id: body.client_id });
+    const user = await User.findOne({ _id: body.user_id });
     const codeValue = Math.random().toString(13).replace('0.', '');
     try{
       const authcode = await authorizationCode.updateOne(
@@ -35,16 +35,17 @@ sendAuthorizationCode = async (req, res) => {
     catch(e) {
       console.log(e);
       return res.status(400).json({
-        message: "Some thing went wrong try again!!",
+        success:false,
+        error: "Something went wrong try again!!",
       });
     }
     
-  } else {
+  } catch(e) {
     return res
       .status(400)
       .json({
         success: false,
-        message: "User or Client does not exist or given information was invalid!!",
+        error: "information invalid",
         authorizationCode: null,
         state: body.state,
       });

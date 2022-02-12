@@ -29,6 +29,7 @@ export default function Signup() {
     settag(true);
     const user = {
       email: email,
+      should_exist:true
     };
     console.log(user);
     setemailtag(false);
@@ -41,6 +42,10 @@ export default function Signup() {
     })
       .then((response) => response.json())
       .then((data) => {
+        if(!data.success) {
+          console.log(data.error);
+          settag(false);
+        }
         console.log("Not verified Success:", data);
       })
       .catch((error) => {

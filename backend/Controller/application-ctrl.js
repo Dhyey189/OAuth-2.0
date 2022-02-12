@@ -43,21 +43,30 @@ sendApplicationDetails = async (req, res) => {
         error: "You must provide Application Details",
       });
     }
-    const client = await Client.findOne({ _id: body.client_id });
-    if(client) {
-      return res
-        .status(200)
-        .json({
-          success: true,
-          message: "Client send successfully",
-          applicationname: client.applicationname,
-          homepageurl: client.homepageurl,
-        });
+    try{
+      const client = await Client.findOne({ _id: body.client_id });
+      if(client) {
+        return res
+          .status(200)
+          .json({
+            success: true,
+            message: "Client send successfully",
+            applicationname: client.applicationname,
+            callbackurl: client.callbackurl,
+            homepageurl:client.homepageurl
+          });
+      }
+      else{
+          return res.status(400).json({
+            success: false,
+            error: "invalid clientID!",
+          });
+      }
     }
-    else {
+    catch(error) {
       return res.status(400).json({
         success: false,
-        message: "Client does not exist!!",
+        error: "something went wrong",
       });
     }
 }

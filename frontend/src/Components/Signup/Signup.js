@@ -12,7 +12,7 @@ export default function Signup() {
   const [nametag, setnametag] = useState(false);
   const [emailtag, setemailtag] = useState(false);
   const [tag, settag] = useState(false);
-  
+  const [error, setError] = useState({});
   const navigate = useNavigate();
   
   const sendcode = (e) => {
@@ -21,6 +21,7 @@ export default function Signup() {
     setnametag(true);
     const user = {
       email: email,
+      should_exist:false
     };
     console.log(user);
     setemailtag(false);
@@ -35,12 +36,25 @@ export default function Signup() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Not verified Success:", data);
+        if(!data.success) {
+          console.log(data.error);
+          settag(false);
+        }
+        console.log("Success:", data);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+
   const signup = (e) => {
     e.preventDefault();
     const user = {
@@ -88,6 +102,7 @@ export default function Signup() {
             setEmail(e.target.value);
           }}
         />
+        <span style={{ color: "red" }}>error</span>
         <Button
           className="button-otp"
           type="submit"
