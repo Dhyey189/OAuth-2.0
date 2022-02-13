@@ -35,7 +35,45 @@ register = async (req, res) => {
       });
   };
 
+sendApplicationDetails = async (req, res) => {
+  const body = req.body;
+    if (!body) {
+      return res.status(400).json({
+        success: false,
+        error: "You must provide Application Details",
+      });
+    }
+    try{
+      const client = await Client.findOne({ _id: body.client_id });
+      if(client) {
+        return res
+          .status(200)
+          .json({
+            success: true,
+            message: "Client send successfully",
+            applicationname: client.applicationname,
+            callbackurl: client.callbackurl,
+            homepageurl:client.homepageurl
+          });
+      }
+      else{
+          return res.status(400).json({
+            success: false,
+            error: "invalid clientID!",
+          });
+      }
+    }
+    catch(error) {
+      return res.status(400).json({
+        success: false,
+        error: "something went wrong",
+      });
+    }
+}
+
   module.exports = {
     register,
+    sendApplicationDetails
   };
+
   

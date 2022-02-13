@@ -93,6 +93,28 @@ generatecode = async (req, res) => {
     });
   }
 
+  try{
+    user = await User.findOne({email:body.email});
+    console.log(user)
+    if(user && !body.should_exist) {
+      return res.status(400).json({
+        success: false,
+        error: "Email already exist!",
+      });
+    }
+    else if(!user && body.should_exist) {
+      return res.status(400).json({
+        success: false,
+        error: "Email not found!",
+      });
+    }
+  }
+  catch(e){
+      return res.status(400).json({
+        success: false,
+        error: "something went wrong",
+      });
+  }
   var val = Math.floor(1000 + Math.random() * 9000);
 
   var x = await Code.updateOne(

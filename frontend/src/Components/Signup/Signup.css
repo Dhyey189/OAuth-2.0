@@ -41,7 +41,10 @@
   height: 35px;
   width: auto;
   border: 1px solid rgba(0, 0, 0, 0.568);
-
+  
+}
+.inbox1::placeholder{
+  color: rgba(0, 0, 0, 0.726);
 }
 
 .button-otp {
@@ -49,4 +52,9 @@
   margin: 10px auto;
   height: 35px;
   /* align: center; */
+}
+
+.error {
+  color:red;
+  
 }
