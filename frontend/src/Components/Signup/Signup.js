@@ -12,21 +12,41 @@ export default function Signup() {
   const [nametag, setnametag] = useState(false);
   const [emailtag, setemailtag] = useState(false);
   const [tag, settag] = useState(false);
-  const [error, setError] = useState({});
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-  
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
   const sendcode = (e) => {
     e.preventDefault();
+    let err = {};
+    let err_count = 0;
+    if (!validateEmail(email)) {
+      err["email"] = "invalid email format!";
+      err_count = err_count + 1;
+    }
+    if (name === "" || name === null) {
+      err["name"] = "name cannot be empty!";
+      err_count = err_count + 1;
+    }
+    else if (name.length < 3) {
+      err["name"] = "name should contain atleast 3 characters!!";
+      err_count = err_count + 1;
+    }
+    setErrors(err);
+    if (err_count > 0)
+      return;
     setemailtag(true);
     setnametag(true);
     const user = {
       email: email,
-      should_exist:false
+      should_exist: false
     };
     console.log(user);
-    setemailtag(false);
-    setnametag(false);
-    settag(true);
     fetch("http://localhost:8000/accounts/generatecode", {
       method: "POST", // or 'PUT'
       headers: {
@@ -36,9 +56,17 @@ export default function Signup() {
     })
       .then((response) => response.json())
       .then((data) => {
-        if(!data.success) {
+        if (!data.success) {
+          let err = {}
           console.log(data.error);
           settag(false);
+          err["signup"] = data.error;
+          setErrors(err);
+        }
+        else {
+          setemailtag(false);
+          setnametag(false);
+          settag(true);
         }
         console.log("Success:", data);
       })
@@ -46,17 +74,24 @@ export default function Signup() {
         console.error("Error:", error);
       });
   };
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
+  
+
 
 
   const signup = (e) => {
     e.preventDefault();
+    let err = {};
+    let err_count = 0;
+    if(otp === "" || otp === null){
+      err["otp"] = "code cannot be empty!";
+      err_count++;
+    }
+    else if(otp.length < 4){
+      err["otp"] = "code should contain at least 4 digits!";
+      err_count++;
+    }
+    setErrors(err);
+    if(err_count > 0)return;
     const user = {
       name: name,
       email: email,
@@ -81,53 +116,74 @@ export default function Signup() {
   };
   return (
     <div className="box">
+      <div className="font-medium leading-tight text-2xl mt-0 mb-6 text-blue-500 ">
+        Sign Up
+      </div>
       <div className="signup">
-        <input
+        {!tag ? <><input
           type="text"
           className="inbox1"
           readOnly={tag}
-          placeholder="your name"
+          placeholder="Name"
           id="name"
           onChange={(e) => {
             setName(e.target.value);
           }}
         />
+        <p class="text-right mr-6 text-red-500 text-m italic">{errors["name"]}</p>
         <input
           className="inbox1"
           type="email"
           readOnly={tag}
-          placeholder="email"
+          placeholder="Email"
           id="email"
           onChange={(e) => {
             setEmail(e.target.value);
           }}
         />
-        <span style={{ color: "red" }}>error</span>
-        <Button
+        <p class="text-right mr-6 text-red-500 text-m italic ">{errors["email"]}</p>
+        {/* <Button
           className="button-otp"
           type="submit"
           onClick={sendcode}
           disabled={tag}
         >
           send code
-        </Button>
+        </Button> */}
+        <div className="flex justify-center mb-6">
+            <button type="submit" disabled={tag} onClick={sendcode}  className=" w-26 bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 border border-blue-700 rounded">
+              Get Code
+            </button>
+        </div></>
+        :null
+        }
         {tag ? (
           <>
             <input
               className="inbox1"
               type="text"
-              placeholder="your otp"
+              placeholder="Enter Code"
               onChange={(e) => {
                 setotp(e.target.value);
               }}
             />
-            <Button type="submit" onClick={signup}>
-              Signup
-            </Button>
+            <p class="text-right mr-6 text-red-500 text-m italic">{errors["otp"]}</p>
+            <div className="flex justify-center">
+            <button type="submit" onClick={signup}  className=" w-26 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 border border-blue-700 rounded">
+              <span>  Sign Up  </span>
+            </button>
+        </div>
           </>
         ) : null}
+        <p class="text-center mr-6 text-red-400 font-bold text-m italic">{errors["signup"]}</p>
+        <div className="text-m">
+        have an account Login     
+        <Link to="/login" className="ml-2 no-underline text-blue-500">
+          here
+        </Link>
+        </div>
         <Link to="/" className="link">
-          <span className="fa fa-arrow-left icon"></span>back
+          <span className="mt-4 fa fa-arrow-left icon"></span>back to home page
         </Link>
       </div>
     </div>

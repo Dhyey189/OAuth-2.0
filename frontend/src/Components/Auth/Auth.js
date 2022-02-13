@@ -50,7 +50,7 @@ export default function Auth() {
             .catch((error) => {
                 console.error("Error:", error);
                 if (query.get('redirect_uri'))
-                    window.location.href = "http://" + query.get('redirect_uri') + "?error=somethingwrong2";
+                    window.location.href = "http://" + query.get('redirect_uri') + "?error=somethingwrong";
                 else
                     navigate('/');
             });
