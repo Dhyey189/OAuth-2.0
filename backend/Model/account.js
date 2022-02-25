@@ -9,6 +9,7 @@ const User = new Schema(
         city : {type:String, required: true},
         mobile: {type:String, required: true},
         occupation : {type:String, required: true},
+        connectedapp:{type:Array,required:false},
 
         // Profile: {type:, required: true}
     },

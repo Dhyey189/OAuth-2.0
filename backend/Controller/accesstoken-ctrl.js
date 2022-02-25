@@ -75,18 +75,17 @@ getuserinfo = async (req, res) => {
     const application = await Application.findOne({ _id: body.client_id });
 
     const user = await Account.findOne({ _id: accesstoken.userid });
-    console.log("hello:",user._id, accesstoken.userid);
     if (user) {
       if (
         application._id == accesstoken.applicationid &&
         application.clientsecret == body.client_secret
       ) {
         if (user) {
-          console.log("In accesstoken !");
-          // console(user._id.str);
           if(!application.users.find(e => (e) === user._id.toString())){
             application.users.push(user._id.toString());
-            application.save()
+            user.connectedapp.push(application._id.toString());
+            user.save();
+            application.save();
           }
           return res
             .status(200)
