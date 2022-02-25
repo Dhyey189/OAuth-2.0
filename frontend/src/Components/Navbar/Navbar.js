@@ -30,6 +30,9 @@ export default function Navigation() {
         <Link className="nav-link" to="/get-clientid">
           Get Client ID
         </Link>
+        <Link className="nav-link" to="/docs">
+          Docs
+        </Link>
       </div>
       <div className="content-right">
         {user ? (

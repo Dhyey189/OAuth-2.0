@@ -2,7 +2,7 @@
   margin: auto;
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 500px;
   grid-area: main;
   align-self: center;
   justify-self: center;

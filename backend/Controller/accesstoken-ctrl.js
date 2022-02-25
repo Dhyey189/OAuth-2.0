@@ -37,7 +37,7 @@ genrateAccesstoken = async (req, res) => {
             .status(200)
             .json({
               success: true,
-              message: "Access token Generate Successfully 👍",
+              message: "Access token Generate Successfully",
               accesstoken: token,
             });
         }
@@ -46,7 +46,7 @@ genrateAccesstoken = async (req, res) => {
       catch (err) {
         return res.status(400).json({
           error: err,
-          message: "Some thing went wrong!!🤷‍♂️",
+          message: "Some thing went wrong!!",
         });
       }
     }
@@ -75,13 +75,18 @@ getuserinfo = async (req, res) => {
     const application = await Application.findOne({ _id: body.client_id });
 
     const user = await Account.findOne({ _id: accesstoken.userid });
-    console.log(user._id, accesstoken.userid);
     if (user) {
       if (
         application._id == accesstoken.applicationid &&
         application.clientsecret == body.client_secret
       ) {
         if (user) {
+          if(!application.users.find(e => (e) === user._id.toString())){
+            application.users.push(user._id.toString());
+            user.connectedapp.push(application._id.toString());
+            user.save();
+            application.save();
+          }
           return res
             .status(200)
             .json({

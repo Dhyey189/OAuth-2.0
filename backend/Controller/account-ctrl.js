@@ -26,6 +26,10 @@ signup = async (req, res) => {
   const user = new User();
   user.email = body.email;
   user.name = body.name;
+  user.dob = body.dob;
+  user.city = body.city;
+  user.mobile = body.mobile;
+  user.occupation = body.occupation;
   Code.deleteOne({ email: body.email });
   if (!user) {
     return res.status(400).json({ success: false, error: err });

@@ -8,6 +8,10 @@ import { Button } from "react-bootstrap";
 export default function Signup() {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
+  const [mobile, setMobile] = useState(null);
+  const [DOB, setDOB] = useState(null);
+  const [occupation, setOccupation] = useState(null);
+  const [city, setCity] = useState(null);
   const [otp, setotp] = useState(null);
   const [nametag, setnametag] = useState(false);
   const [emailtag, setemailtag] = useState(false);
@@ -96,6 +100,10 @@ export default function Signup() {
       name: name,
       email: email,
       otp: otp,
+      dob:DOB,
+      occupation:occupation,
+      city: city,
+      mobile: mobile
     };
     fetch("http://localhost:8000/accounts/signup", {
       method: "POST", // or 'PUT'
@@ -142,6 +150,58 @@ export default function Signup() {
           }}
         />
         <p class="text-right mr-6 text-red-500 text-m italic ">{errors["email"]}</p>
+        <div className="flex">
+        <input
+          className="inbox1"
+          type="text"
+          readOnly={tag}
+          placeholder="occupation"
+          id="occupation"
+          onChange={(e) => {
+            setOccupation(e.target.value);
+          }}
+        />
+        <p class="text-right mr-6 text-red-500 text-m italic ">{errors["email"]}</p>
+        <input
+          className="inbox1"
+          type="date"
+          readOnly={tag}
+          placeholder="Date of Birth"
+          id="DOB"
+          onChange={(e) => {
+            setDOB(e.target.value);
+          }}
+        />
+        <p class="text-right mr-6 text-red-500 text-m italic ">{errors["email"]}</p>
+        </div>
+        <div className="flex">
+
+        <input
+          className="inbox1"
+          type="text"
+          readOnly={tag}
+          placeholder="Home city"
+          id="city"
+          onChange={(e) => {
+            setCity(e.target.value);
+          }}
+        />
+        <p class="text-right mr-6 text-red-500 text-m italic ">{errors["email"]}</p>
+        <input
+          className="inbox1"
+          type="text"
+          readOnly={tag}
+          placeholder="mobile"
+          id="mobile"
+          onChange={(e) => {
+            setMobile(e.target.value);
+          }}
+        />
+        <p class="text-right mr-6 text-red-500 text-m italic ">{errors["email"]}</p>
+        </div>
+        <div className="flex">
+        
+        </div>
         {/* <Button
           className="button-otp"
           type="submit"
