@@ -7,8 +7,8 @@ const Application = new Schema(
         applicationname: { type: String, required: true},
         homepageurl: { type: String, required: true},
         callbackurl: { type: String, required: true},// redirect_uri
-        clientsecret:{type:String,required:true},// client password
-        users:{type:Array,required:false}
+        clientsecret:{ type:String,required:true},// client password
+        users:{ type:Array,required:false}
     },
     {
         timestamps: true
