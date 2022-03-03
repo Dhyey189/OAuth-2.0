@@ -39,10 +39,10 @@ export default function Auth() {
                     if (query.get('redirect_uri'))
                         window.location.href = "http://" + query.get('redirect_uri') + "?error="+data.error;
                     else
-                        navigate('/');
+                        navigate('/error');
                 }
                 if(data.callbackurl !== "http://" + query.get('redirect_uri') + '/'){
-                    navigate('/');
+                    navigate('/error');
                 }
                 setApplicationName(data.applicationname);
                 setApplicationUrl(data.homepageurl);
@@ -52,7 +52,7 @@ export default function Auth() {
                 if (query.get('redirect_uri'))
                     window.location.href = "http://" + query.get('redirect_uri') + "?error=somethingwrong";
                 else
-                    navigate('/');
+                    navigate('/error');
             });
         }
         else {
@@ -84,7 +84,7 @@ export default function Auth() {
                 if (query.get('redirect_uri'))
                     window.location.href = "http://" + query.get('redirect_uri') + "?error="+data.error;
                 else
-                    navigate('/');
+                    navigate('/error');
             }
             window.location.href = "http://" + query.get('redirect_uri') + "?code=" + data.authorizationcode + "&response=allowed";
         })
@@ -93,7 +93,7 @@ export default function Auth() {
             if (query.get('redirect_uri'))
                 window.location.href = "http://" + query.get('redirect_uri') + "?error=somethingwrong";
             else
-                navigate('/');
+                navigate('/error');
         });
     }
 

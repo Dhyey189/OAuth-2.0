@@ -5,6 +5,7 @@ import Login from './Components/Login/Login.js'
 import ClientID from './Components/ClientID/ClientID.js';
 import Auth from './Components/Auth/Auth.js';
 import Docs from './Components/Docs/Docs'
+import Error from './Components/Error/Error.js';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/get-clientid" element={<ClientID />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/docs" element={<Docs />} />
+            <Route path="/error" element={<Error />} />
       </Routes>
     </Router>
     );
