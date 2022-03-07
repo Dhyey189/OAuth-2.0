@@ -6,7 +6,7 @@ import './Docs.css'
 
 export default function Docs() {
     return (
-        <div className="container">
+        <div className="container dark">
             <h1 class="text-center fst-italic">OAuth 2.0 Documentation</h1><br />
             <h2>Client Registration</h2><br />
             <p>

@@ -27,6 +27,9 @@ export default function Navigation() {
     <nav className="navbar">
       <div className="brand">
         <h2>OAuth 2.0</h2>
+        <Link className="nav-link" to="/developer">
+          Dev Profile
+        </Link>
         <Link className="nav-link" to="/get-clientid">
           Get Client ID
         </Link>

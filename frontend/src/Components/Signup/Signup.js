@@ -1,11 +1,20 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import "./Signup.css";
 import ReactCodeInput from "react-verification-code-input";
 import { Button } from "react-bootstrap";
 
 
 export default function Signup() {
+  const query = new URLSearchParams(useLocation().search);
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [mobile, setMobile] = useState(null);
@@ -115,8 +124,22 @@ export default function Signup() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Verified Success:", data);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/");
+        if(!data.success){
+          setErrors({"signup":"Invalid Otp!"});
+          // settag(false);
+        }
+        else{
+          localStorage.setItem("user", JSON.stringify(data.user));
+          if(query.get('backto')){
+            // navigate("/"+query.get('backto')+'?client_id='+query.get('client_id')+'&response_type='+query.get('response_type')
+            // +'&state='+query.get('state')+'&redirect_uri='+query.get('redirect_uri')+'&scope='+query.get('scope'))
+            const backto = query.get('backto')
+            query.delete('backto');
+            navigate("/"+backto+"?"+query);
+          }
+          else
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -238,7 +261,7 @@ export default function Signup() {
         <p class="text-center mr-6 text-red-400 font-bold text-m italic">{errors["signup"]}</p>
         <div className="text-m">
         have an account Login     
-        <Link to="/login" className="ml-2 no-underline text-blue-500">
+        <Link to={`/login?${query}`} className="ml-2 no-underline text-blue-500">
           here
         </Link>
         </div>
