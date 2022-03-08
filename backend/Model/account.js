@@ -10,8 +10,7 @@ const User = new Schema(
         mobile: {type:String, required: true},
         occupation : {type:String, required: true},
         connectedapp:{type:Array,required:false},
-
-        // Profile: {type:, required: true}
+        createdapp:{type:Array,required:false},
     },
     {
         timestamps: true
