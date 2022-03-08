@@ -124,7 +124,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="box">
+    <div className="box absolute inset-0 w-fit h-fit my-auto">
       <div className="font-medium leading-tight text-2xl mt-0 mb-6 text-blue-500 ">
         Login
       </div>
@@ -145,13 +145,14 @@ export default function Signup() {
         <p class="text-right mr-6 text-red-500 text-m italic ">{errors["email"]}</p>
         <div className="flex justify-center mb-6">
             <button type="submit" onClick={sendcode}  className=" w-26 bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 border border-blue-700 rounded">
-              Get Code
+              verify
             </button>
         </div>
         </>:null
       }
         {tag ? (
           <>
+          <p className="italic font-semibold">*Check your Email for OTP</p>
             <input
               type="text"
               placeholder="Enter Code"
