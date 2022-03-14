@@ -12,6 +12,7 @@ export default function ClientID() {
   const [clientID, setClientID] = useState(null);
   const [clientsecret, setClientSecret] = useState(null);
   const [errors, setErrors] = useState({});
+
   const register = (e) => {
     e.preventDefault();
     let err = {};
@@ -32,6 +33,7 @@ export default function ClientID() {
     if(err_count > 0)return;
     setTag(true);
     const client = {
+      id:JSON.parse(localStorage.getItem("user"))._id,
       applicationname: appname,
       homepageurl: homeURL,
       discreption: disc,
@@ -107,18 +109,15 @@ export default function ClientID() {
       <button type="submit" onClick={register} disabled={tag}  className="w-fit mx-auto mb-6  bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 border border-blue-700 rounded">
         <span>  Create Application  </span>
       </button>
-      <Link to="/" className="link">
-        <span className="fa fa-arrow-left icon"></span>back to home page
-      </Link>
       {tag ? (
         <div className="">
           <div>
-            <div className="label">your clientID : </div>
+            <div className="label">ClientID : </div>
             <span className="value">{clientID}</span>
           </div>
           <br />
           <div>
-            <div className="label">your clientsecret : </div>
+            <div className="label">Clientsecret : </div>
             <span className="value">{clientsecret}</span>
           </div>
         </div>

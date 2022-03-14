@@ -3,7 +3,7 @@ const User = require('../Model/account')
 
 register = async (req, res) => {
   const body = req.body;
-  const id= body.id;
+  const id = body.id;
   if (!body) {
     return res.status(400).json({
       success: false,
@@ -12,7 +12,7 @@ register = async (req, res) => {
   }
   const client = new Client();
   console.log(client._id.toString());
-  
+
   // const user = await User.findOne({ _id: id });
   client.applicationname = body.applicationname;
   client.homepageurl = body.homepageurl;
@@ -22,18 +22,14 @@ register = async (req, res) => {
   if (!client) {
     return res.status(400).json({ success: false, error: err });
   }
+  user = await User.findOne({ _id: id });
   client
     .save()
     .then(() => {
-        User.findOne({ _id: id }, (err, user) => {
-          if (user) {
-            User.updateOne({ _id: id }, { $push: { "createdapp":client._id.toString() } }, (err, user) => {
-              if (err) {
-                res.send({ message: "Error Not Added Into created app" })
-              } 
-            })
-          }
-        });
+      console.log("HELLO I M USER",user);
+      if(user.createdapp == undefined)user.createdapp = [];
+      user.createdapp.push(client._id.toString());
+      user.save();
       return res
         .status(200)
         .json({
@@ -43,13 +39,12 @@ register = async (req, res) => {
         });
     })
     .catch((error) => {
+      console.log(error);
       return res.status(400).json({
         error,
         message: "Application not Registerd!",
       });
     });
-    
-
 };
 
 sendApplicationDetails = async (req, res) => {
@@ -100,13 +95,13 @@ getApplicationDetails = async (req, res) => {
         informations.push(item)
         if (i == user.createdapp.length - 1) {
           console.log(informations)
-          res.send({ message: "Successfully take information", data: informations })
+          res.send({ success: true, message: "Successfully take information", data: informations })
         }
       })
     }
   }
   else {
-    res.send({ message: "User not found" })
+    res.send({ success: false, message: "User not found" })
   }
 
 }

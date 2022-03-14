@@ -7,12 +7,12 @@ import './Docs.css'
 export default function Docs() {
     return (
         <div className="container dark">
-            <h1 class="text-center fst-italic">OAuth 2.0 Documentation</h1><br />
+            <h1 class="text-center">Documentation</h1><br />
             <h2>Client Registration</h2><br />
             <p>
                 How do developers register a new client application to obtain a client ID and optionally a secret?
             </p>
-            Here is a link to the registration page click here to <Link to="/get-clientid">Register </Link><br />
+            Here is a link to the registration page click here to <Link to="/developer">Register </Link><br />
             <p>
                 In register application you should enter required information about your application so we can know about your application
                 here is the way to provide redirect url and other information you collect about an application, and indicate which pieces of information are shown to the end-user during the authorization request.

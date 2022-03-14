@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
 import "./Navbar.css";
 
@@ -26,14 +26,11 @@ export default function Navigation() {
   return (
     <nav className="navbar">
       <div className="brand">
-        <h2>OAuth 2.0</h2>
-        <Link className="nav-link" to="/developer">
-          Dev Profile
-        </Link>
-        <Link className="nav-link" to="/get-clientid">
-          Get Client ID
-        </Link>
-        <Link className="nav-link" to="/docs">
+        <NavLink to="/" className="nav-link"><h3 className="font-bold tracking-wider">OAuth 2.0</h3></NavLink>
+        <NavLink className="nav-link tracking-wide"  to="/developer">
+          Devloper Profile
+        </NavLink>
+        <Link className="nav-link tracking-wide" to="/docs">
           Docs
         </Link>
       </div>
@@ -41,7 +38,7 @@ export default function Navigation() {
         {user ? (
           <>
             <div className="text-2xl text-slate-300 mr-3">{user.name}</div>
-            <Button className="mr-3"variant="dark" onClick={logout}>
+            <Button className="mr-3" variant="dark" onClick={logout}>
               logout
             </Button>
           </>
