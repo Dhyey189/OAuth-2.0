@@ -19,8 +19,9 @@ export default function Developer() {
     const [showModal, setShowModal] = React.useState(false);
     const [user, setUser] = useState(null);
     useEffect(() => {
-        if(localStorage.getItem("user") == null){
+        if(localStorage.getItem("user") === null){
             navigate('/login?backto=developer');
+            return;
         }
         else{
             setUser(JSON.parse(localStorage.getItem("user")));
@@ -45,40 +46,40 @@ export default function Developer() {
       .catch((error) => {
         console.error("Error:", error);
       });
-    },[])
+    },[showModal])
     const AppDetails = (url,users,CID,CS) =>{
         return(
-        <table className="text-purple-900 bg-purple-100">
-                <tr className="">
+        <table className="w-full text-purple-900 bg-purple-100">
+                <tr className="mb-2">
                     <td>
-                        <p>Home Page Url</p>
+                        <p className="mb-0">Home Page Url</p>
                     </td>
                     <td>
                         <a href={url} target="_blank">{url} </a>
                     </td>
                 </tr>
-                <tr className="">
+                <tr className="mb-2">
                     <td>
-                        <p>Number of Users</p>
+                        <p className="mb-0">Number of Users</p>
                     </td>
                     <td>
-                        <p>{users}</p>
-                    </td>
-                </tr>
-                <tr className="">
-                    <td>
-                        <p>ClientID</p>
-                    </td>
-                    <td>
-                        <p>{CID}</p>
+                        <p className="mb-0">{users}</p>
                     </td>
                 </tr>
-                <tr className="">
+                <tr className="mb-2">
                     <td>
-                        <p>Client Secret</p>
+                        <p className="mb-0">ClientID</p>
                     </td>
                     <td>
-                        <p>{CS}</p>
+                        <p className="mb-0">{CID}</p>
+                    </td>
+                </tr>
+                <tr className="mb-2">
+                    <td>
+                        <p className="mb-0">Client Secret</p>
+                    </td>
+                    <td>
+                        <p className="mb-0">{CS}</p>
                     </td>
                 </tr>
             </table>)
@@ -87,11 +88,12 @@ export default function Developer() {
         <>
         <div className="m-8">
             <div className="mb-6">Your Apps</div>
+            <div className="flex flex-col justify-center w-2/5 mx-auto">
             {apps.map( (app,i) => 
             <Disclosure>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+              <Disclosure.Button className="my-1 flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                 <span>{i+1}. {app.applicationname}</span>
                 <ChevronUpIcon
                   className={`${
@@ -99,16 +101,17 @@ export default function Developer() {
                   } w-5 h-5 text-purple-500`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+              <Disclosure.Panel className="px-4 pt-1 pb-2 text-sm text-gray-500">
                 {AppDetails(app.homepageurl,app.users.length,app._id,app.clientsecret)}
               </Disclosure.Panel>
             </>
           )}
         </Disclosure>
             ) }
-        <button type="submit" onClick={()=>setShowModal(!showModal)}  className="mt-6 w-26 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 border border-blue-700 rounded">
-              <span>  Create New Application  </span>
-        </button>
+          <button type="submit" onClick={()=>setShowModal(!showModal)}  className=" w-fit mx-auto mt-6 w-26 bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 border border-blue-700 rounded">
+                <span>  Create New Application  </span>
+          </button>
+            </div>
          <Modal show={showModal} onHide={()=>setShowModal(false)}
       centered>
             <ClientID/>

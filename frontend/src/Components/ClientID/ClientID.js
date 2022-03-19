@@ -58,7 +58,7 @@ export default function ClientID() {
   };
 
   return (
-    <div className="box ">
+    <div className="box absolute inset-0 w-fit h-fit my-auto">
       <div className="font-medium leading-tight text-2xl mt-0 mb-6 text-blue-500 ">
         APPLICATION
       </div>
