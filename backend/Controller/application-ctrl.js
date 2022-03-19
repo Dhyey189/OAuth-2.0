@@ -91,14 +91,10 @@ getApplicationDetails = async (req, res) => {
     console.log(user.createdapp);
     // var app=['6225f2e6f8ea0310356af370','6225eb3317f4998c2fcace2f','61fa6488efb0c2efd0d03b6e']
     for (let i = 0; i < user.createdapp.length; i++) {
-      Client.findOne({ _id: user.createdapp[i] }, (error, item) => {
-        informations.push(item)
-        if (i == user.createdapp.length - 1) {
-          console.log(informations)
-          res.send({ success: true, message: "Successfully take information", data: informations })
-        }
-      })
+      informations.push(await Client.findOne({ _id: user.createdapp[i] }))
     }
+    console.log("information" , informations)
+    res.send({ success: true, message: "Successfully take information", data: informations })
   }
   else {
     res.send({ success: false, message: "User not found" })
