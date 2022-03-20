@@ -25,16 +25,22 @@ auth = async (req, res) => {
         })
         .then((userinfo)=>{
           console.log("USER DATA",userinfo.data.user)
-          res.status(200).json({
+          return res.status(200).json({
             userinfo:userinfo.data.user
           });
         })
         .catch((error)=>{
-            console.log(error);
+            res.status(401).json({
+              success: false,
+              error:error
+            })
         })
       })
       .catch((error) => {
-        console.error("Error:", error);
+        res.status(401).json({
+        success: false,
+        error:error
+      })
       });
 }
 

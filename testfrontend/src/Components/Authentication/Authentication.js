@@ -21,8 +21,12 @@ export default function Auth() {
             },
             body: JSON.stringify({'code':query.get('code')}),
             })
-            .then((response) => response.json())
+            .then((response) => {
+                if(!response.ok) throw new Error(response.status);
+                else return response.json();
+              })
             .then((data) => {
+                // console.log(response);
                 localStorage.setItem("user", JSON.stringify(data.userinfo));
                 navigate('/info');
             })

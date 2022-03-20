@@ -1,8 +1,9 @@
 import { React, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
+import Body from '../Body/Body'
 import "./Navbar.css";
-
+import pic from './UTH1.png'
 export default function Navigation() {
   const [user, setUser] = useState(null);
 
@@ -24,13 +25,14 @@ export default function Navigation() {
     navigate("/");
   };
   return (
+    <>
     <nav className="navbar">
       <div className="brand">
-        <h2>OAuth 2.0</h2>
-        <Link className="nav-link" to="/get-clientid">
-          Get Client ID
-        </Link>
-        <Link className="nav-link" to="/docs">
+        <NavLink to="/" className="nav-link"><img className='h-12' src={pic}></img></NavLink>
+        <NavLink className="nav-link tracking-wide"  to="/developer">
+          Devloper Profile
+        </NavLink>
+        <Link className="nav-link tracking-wide" to="/docs">
           Docs
         </Link>
       </div>
@@ -38,7 +40,7 @@ export default function Navigation() {
         {user ? (
           <>
             <div className="text-2xl text-slate-300 mr-3">{user.name}</div>
-            <Button className="mr-3"variant="dark" onClick={logout}>
+            <Button className="mr-3" variant="dark" onClick={logout}>
               logout
             </Button>
           </>
@@ -54,5 +56,6 @@ export default function Navigation() {
         )}
       </div>
     </nav>
+    </>
   );
 }

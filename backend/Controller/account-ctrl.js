@@ -83,7 +83,6 @@ login = async (req, res) => {
       .json({
         success: false,
         message: "user not exist!!",
-        user: null,
       });
   }
 };

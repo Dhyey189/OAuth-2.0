@@ -101,12 +101,22 @@ export default function Signup() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Verified Success:", data);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        if(query.get('backto'))
-        navigate("/"+query.get('backto')+'?client_id='+query.get('client_id')+'&response_type='+query.get('response_type')
-        +'&state='+query.get('state')+'&redirect_uri='+query.get('redirect_uri')+'&scope='+query.get('scope'))
-        else
-        navigate("/");
+        if(!data.success){
+          setErrors({"login":"Invalid Otp!"});
+          // settag(false);
+        }
+        else{
+          localStorage.setItem("user", JSON.stringify(data.user));
+          if(query.get('backto')){
+            // navigate("/"+query.get('backto')+'?client_id='+query.get('client_id')+'&response_type='+query.get('response_type')
+            // +'&state='+query.get('state')+'&redirect_uri='+query.get('redirect_uri')+'&scope='+query.get('scope'))
+            const backto = query.get('backto')
+            query.delete('backto');
+            navigate("/"+backto+"?"+query);
+          }
+          else
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -114,7 +124,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="box">
+    <div className="box absolute inset-0 w-fit h-fit my-auto">
       <div className="font-medium leading-tight text-2xl mt-0 mb-6 text-blue-500 ">
         Login
       </div>
@@ -135,13 +145,14 @@ export default function Signup() {
         <p class="text-right mr-6 text-red-500 text-m italic ">{errors["email"]}</p>
         <div className="flex justify-center mb-6">
             <button type="submit" onClick={sendcode}  className=" w-26 bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 border border-blue-700 rounded">
-              Get Code
+              verify
             </button>
         </div>
         </>:null
       }
         {tag ? (
           <>
+          <p className="italic font-semibold">*Check your Email for OTP</p>
             <input
               type="text"
               placeholder="Enter Code"
@@ -168,7 +179,7 @@ export default function Signup() {
         <p class="text-center mr-6 text-red-400 font-bold text-m italic ">{errors["login"]}</p>
         <div className="text-m">
         don't have an account create    
-        <Link to="/signup" className="ml-2 no-underline text-blue-500">
+        <Link to={`/signup?${query}`} className="ml-2 no-underline text-blue-500">
           here
         </Link>
         </div>
