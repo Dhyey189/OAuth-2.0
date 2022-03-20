@@ -87,8 +87,9 @@ export default function Developer() {
     return (
         <>
         <div className="m-8">
-            <div className="mb-6">Your Apps</div>
+            
             <div className="flex flex-col justify-center w-2/5 mx-auto">
+            <h3 className="mb-6 ">Your Apps</h3>
             {apps.map( (app,i) => 
             <Disclosure>
           {({ open }) => (

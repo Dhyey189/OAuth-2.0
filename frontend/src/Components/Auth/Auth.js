@@ -7,6 +7,7 @@ import { useSearchParams, useLocation } from "react-router-dom";
 
 import { Button } from "react-bootstrap";
 import "./Auth.css"
+import pic from './UTH2.png'
 
 // https:/localhost:3000/auth/?client_id=a17c21ed
 // &response_type=code
@@ -103,7 +104,8 @@ export default function Auth() {
     }
 
     return (
-        <div className="mx-auto w-fit box">
+        <div className="absolute inset-0 w-fit h-fit my-auto box ">
+            <img className="h-14 mb-6" src={pic}></img>
             <div className="text-xl"><a href={applicationUrl}>{applicationName}</a> wants your basic information for authentication</div>
             <div className="mx-auto w-fit mt-2"><Button className="mr-5" onClick={sendAuthCodeAndRedirect} size="sm">Allow</Button>
                 <Button variant="outline-dark" size="sm" onClick={doNotSendAuthCodeAndRedirect}>Deny</Button>

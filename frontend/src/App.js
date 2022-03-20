@@ -6,6 +6,7 @@ import Auth from './Components/Auth/Auth.js';
 import Docs from './Components/Docs/Docs'
 import Error from './Components/Error/Error.js';
 import Developer from './Components/Developer/Developer'
+import Body from'./Components/Body/Body'
 import './App.css';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
     <>
     <Router>
       <Routes>        
-            <Route path="/" element={<Navbar/>} />
+            <Route path="/" element={<><Navbar/><Body /></>} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/developer" element={<><Navbar/><Developer /></>} />

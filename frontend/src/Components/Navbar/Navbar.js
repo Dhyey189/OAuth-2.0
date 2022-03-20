@@ -1,8 +1,9 @@
 import { React, useState, useEffect } from "react";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
+import Body from '../Body/Body'
 import "./Navbar.css";
-
+import pic from './UTH1.png'
 export default function Navigation() {
   const [user, setUser] = useState(null);
 
@@ -24,9 +25,10 @@ export default function Navigation() {
     navigate("/");
   };
   return (
+    <>
     <nav className="navbar">
       <div className="brand">
-        <NavLink to="/" className="nav-link"><h3 className="font-bold tracking-wider">OAuth 2.0</h3></NavLink>
+        <NavLink to="/" className="nav-link"><img className='h-12' src={pic}></img></NavLink>
         <NavLink className="nav-link tracking-wide"  to="/developer">
           Devloper Profile
         </NavLink>
@@ -54,5 +56,6 @@ export default function Navigation() {
         )}
       </div>
     </nav>
+    </>
   );
 }
