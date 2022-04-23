@@ -20,5 +20,5 @@ Tailwind CSS
 ## Motive
 Main motive is to implement authorization server using OAuth-2.0 standards for passwordless authentication across various web applications.
 
-## Report
+## Project Report
 [Link](https://drive.google.com/file/d/1A1mnQ2-XqWXUbscccZKzRDg2p8enkqJd/view?usp=sharing)
