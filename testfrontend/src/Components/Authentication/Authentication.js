@@ -38,7 +38,7 @@ export default function Auth() {
     },[])
     return(
         <div className="mx-auto w-fit mt-4">
-        <Button variant="outline-dark" size="sm" onClick={()=>{window.location.href="http://localhost:3000/auth?client_id="+CID+"&response_type=code&state=123abc&redirect_uri=localhost:9000&scope=profile"}}>SignUp With OAuth2.0</Button>
+        <Button variant="outline-dark" size="sm" onClick={()=>{window.location.href="http://localhost:3000/auth?client_id="+CID+"&response_type=code&state=123abc&redirect_uri=localhost:9000&scope=profile"}}>SignUp With AuthPoint</Button>
         </div>
     )
 };

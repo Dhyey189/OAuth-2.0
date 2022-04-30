@@ -130,15 +130,15 @@ generatecode = async (req, res) => {
     var transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "easytoquiz@gmail.com",
-        pass: "emfkorqvdaggsjmt",
+        user: "authforauthpoint@gmail.com",
+        pass: "bogiewqkklpeszit",
       },
       tls: {
         rejectUnauthorized: false
     }
     });
     var mailOptions = {
-      from: "easytoquiz@gmail.com",
+      from: "authforauthpoint@gmail.com",
       to: body.email,
       subject: "OTP",
       text: String(val),
