@@ -1,0 +1,42 @@
+.btn-auth{
+    display: flex;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    background-color: #4299e1;
+    border-radius: 7px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    line-height: 26px;
+    
+}
+.div-auth{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: fit-content;
+    width: fit-content;
+}
+.logoutbtn-auth{
+    display: flex;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    background-color: #4299e1;
+    border-radius: 7px;
+    padding: 8px 16px;
+    font-size: 16px;
+    /* font-weight: 700; */
+    color: white;
+    /* line-height: 26px; */
+    margin:auto
+}
+
+.font-class{
+    font-size: 20px;
+}
