@@ -5,7 +5,7 @@ import {
     useNavigate,
 } from "react-router-dom";
 import { useSearchParams, useLocation } from "react-router-dom";
-
+import "./Authentication.css";
 const CID = '61fa6488efb0c2efd0d03b6e';
 
 export default function Auth() {
@@ -38,7 +38,7 @@ export default function Auth() {
     },[])
     return(
         <div className="mx-auto w-fit mt-4">
-        <Button variant="outline-dark" size="sm" onClick={()=>{window.location.href="http://localhost:3000/auth?client_id="+CID+"&response_type=code&state=123abc&redirect_uri=localhost:9000&scope=profile"}}>SignUp With AuthPoint</Button>
+        <Button className = "btn-auth div-auth" variant="outline-dark" size="sm" onClick={()=>{window.location.href="http://localhost:3000/auth?client_id="+CID+"&response_type=code&state=123abc&redirect_uri=localhost:9000&scope=profile"}}>SignUp With AuthPoint</Button>
         </div>
     )
 };
