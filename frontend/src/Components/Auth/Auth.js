@@ -60,7 +60,7 @@ export default function Auth() {
             if (query.get('redirect_uri'))
                 window.location.href = "http://" + query.get('redirect_uri') + "?error=incompletedetails";
             else
-                navigate('/');
+                navigate('/error');
         }
     }, [])
 
